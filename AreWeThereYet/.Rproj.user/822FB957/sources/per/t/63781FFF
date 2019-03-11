@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1552297217415.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "0|35|95|0|\n",
+    "hash" : "723606612",
+    "id" : "63781FFF",
+    "lastKnownWriteTime" : 1552315804,
+    "last_content_update" : 1552315804936,
+    "path" : "J:/Personalprojects/ShinyApps/AreWeThereYet/global.R",
+    "project_path" : "global.R",
+    "properties" : {
+        "cursorPosition" : "132,2",
+        "scrollLine" : "104",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

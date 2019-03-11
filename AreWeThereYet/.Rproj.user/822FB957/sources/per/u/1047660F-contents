@@ -1,0 +1,88 @@
+library(shiny)
+library(data.table)
+library(DT)
+library(ggplot2)
+
+tdata <- data.table(fruit = c("Apple", "Apple", "Apple", "Apple", "Apple", "Apple", "Apple", "Apple","Banana", "Banana","Banana","Banana","Banana", "Banana","Banana","Banana"), 
+                    Fertilizer = c(1,2,4,3,2,2,2,2,1,4,3,2,4,4,3,1), 
+                    amount = c(2,3,4,7,1,34,33,21,12,32,22,17,14,9,22,6),
+                    red = rep(c("+","+","-","-"),4),
+                    green = rep(c("+","-"),8))
+tdata[, grp := do.call(paste, c(list(sep="\n"),.SD)),.SDcols = 4:5]
+
+
+
+ui <- (fluidPage(tagList(
+  sidebarLayout(
+    sidebarPanel(uiOutput("file_input")),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Data",dataTableOutput('fruit_table') ),
+        tabPanel("Plot", plotOutput('boxPlot'))
+        
+      ))))))
+
+server <- function(input, output) {
+  
+  fileData <- tdata # static data, doesn't change, noneed to be reactive
+  
+  output$file_input <- renderUI ({
+    validate(need(!is.null(fileData), ''))
+    tagList(
+      checkboxGroupInput(inputId = "fruit",
+                         label = "fruit",
+                         choices = c(unique(fileData[,get("fruit")])),
+                         selected = fileData[1, 1, with = FALSE]),
+      checkboxGroupInput(inputId = "tube",
+                         label = "Fertilizer",
+                         choices = unique(fileData[,get("Fertilizer")]),
+                         selected = fileData[1, 3, with = F]),
+      ###build checkboxes from Loop:
+      lapply(seq(length(fileData)-4), function(i) {
+        checkboxGroupInput(inputId = paste0("color",i),
+                           label = colnames(fileData[,i+3, with = FALSE]),
+                           choices = c(unique(fileData[,get(colnames(fileData[,i+3, with = FALSE]))])),
+                           inline = TRUE,
+                           selected = fileData[1, i+3, with = FALSE])
+      })
+    )
+  })
+  
+  # build a filter according to inputs
+  myFilter <- reactive({
+    validate(need(!is.null(fileData), ''))
+    validate(
+      need(input$fruit, 'Check at least one fruit'),
+      need(input$tube, 'Check at least one Fertilizer'),
+      need(input$color1, "Check at least one !"), 
+      need(input$color2, "Check at least one !")
+    )
+    
+    fileData[,fruit] %in% input$fruit & fileData[,Fertilizer] %in% input$tube &
+      fileData[,red] %in% input$color1 & fileData[,green] %in% input$color2
+    
+  })
+  
+  # print the datatable matching myFilter()
+  output$fruit_table <- renderDataTable({
+    datatable(fileData[myFilter(),],options = list(pageLength = 25))
+  })
+  
+  # build a boxPLot according to myFilter()
+  output$boxPlot <- renderPlot({
+    validate(
+      need(!is.null(fileData), ''),
+      need(input$fruit, 'Check at least one fruit'),
+      need(input$tube, 'Check at least one Fertilizer'),
+      need(input$color1, "Check at least one !"),
+      need(input$color2, "Check at least one !")
+    )
+    
+    data <- fileData[myFilter(),]
+    ggplot(data = data, mapping = aes( x = data[,grp], y =data[,amount]))+
+      geom_boxplot( stat = 'boxplot',
+                    position = position_dodge(width=0.8),
+                    width = 0.55)
+  })
+}
+shinyApp(ui = ui, server = server)
