@@ -92,7 +92,7 @@ server <- function(input, output, session) {
                                   y = ~Time,
                                   type = "bar", orientation = 'h', text = paste(Growth,"%"), textfont = t, textposition = 'auto',
                                   marker = list( color = ~Growth,colors= c("green","blue") ,size=10 , opacity=0.2, line = list(color =~Growth, opacity=0.2, width = 1))
-                                  )%>%
+                                  )%>% config(displayModeBar = F) %>%
                                   #mode = "lines+markers")
                             layout(title =  paste("The current time is: ", format(Sys.time(), "%a %d %b %Y %X %Z")),
                                    font = list(family = "Georgia",
