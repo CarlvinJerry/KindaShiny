@@ -1,0 +1,10 @@
+name: analyticstests
+title:
+username:
+account: carlvinm
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1538649
+bundleId: 2625480
+url: https://carlvinm.shinyapps.io/analyticstests/
+when: 1574991452.83537
