@@ -34,15 +34,15 @@ server <- function(input, output) {
       autoWidth = TRUE, scrollX = TRUE, pageLength = 90, dom = "Bfrtip", scrollY = "600px",
       buttons = c("copy", "csv", "excel", "pdf", "print"), fixedHeader = TRUE, keys = TRUE
     )) %>%
-      formatRound(columns = c(4:47), digits = 6) %>%
+      formatRound(columns = c(4:49), digits = 6) %>%
       formatStyle(c(
         "diffUnits", "diffWeights", "diffUnitPrice", "diffPerformance", "diffweightedPerformance",
         "diffBenchmarkPerf", "diffBenchmarkWeight", "diffWeightedBMPerf", "diffActiveWeight", "diffActiveReturn",
         "diffSelectionEffect", "diffAllocationEffect", "diffInteractionEffect", "diffActiveManagement"
       ),
-      color = styleInterval(c(-0.001, 0.001), c("red", "green", "red")), fontWeight = "bold"
+      color = styleInterval(c(-0.0001, 0.0001), c("red", "green", "red")), fontWeight = "bold"
       ) %>%
-      formatPercentage(columns = c(14:47), digits = 4)
+      formatPercentage(columns = c(14:49), digits = 4)
   })
 #
   # Diff Output----
@@ -156,9 +156,9 @@ server <- function(input, output) {
             format = colFormat(percent = F, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values)))),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -171,9 +171,9 @@ server <- function(input, output) {
             format = colFormat(percent = F, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -186,9 +186,9 @@ server <- function(input, output) {
             format = colFormat(percent = T, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -201,9 +201,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -216,9 +216,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -231,9 +231,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -246,9 +246,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -261,9 +261,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -276,9 +276,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -291,9 +291,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -306,9 +306,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -321,9 +321,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < 0.001) {
+              } else if (as.numeric(as.character(values)) < 0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -336,9 +336,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) < -0.001) {
+              } else if (as.numeric(as.character(values)) < -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"
@@ -351,9 +351,9 @@ server <- function(input, output) {
             format = colFormat(percent = TRUE, digits = 6),
             footer = function(values) sprintf("%.4f", sum(as.numeric(as.character(values))) * 100),
             style = function(values) {
-              if (as.numeric(as.character(values)) > 0.001) {
+              if (as.numeric(as.character(values)) > 0.0001) {
                 color <- " #e00000"
-              } else if (as.numeric(as.character(values)) > -0.001) {
+              } else if (as.numeric(as.character(values)) > -0.0001) {
                 color <- "#e00000"
               } else {
                 color <- "#008000"

@@ -186,7 +186,7 @@ assetLevel <- function(data) {
     mutate(diffUnits = test_Units - Units) %>% # DIff Units
 
     # Unit Price----
-    mutate(test_UnitPRice = ifelse(!ClosingMarketValue, 0, ClosingMarketValue / test_Units)) %>% # Unit Price
+    mutate(test_UnitPRice = ifelse(!ClosingMarketValue | !OpeningMarketValue, 1, ClosingMarketValue / test_Units)) %>% # Unit Price
     mutate(diffUnitPrice = test_UnitPRice - UnitPrice) %>% # Diff Unit Price
 
     # Portfolio Perf----
@@ -237,7 +237,7 @@ assetLevel <- function(data) {
     mutate(test_ActiveManagementEffect = test_AllocationEffect + test_SelectionEffect) %>% #
     mutate(diffActiveManagement = test_ActiveManagementEffect - (ActiveManagementEffect / 100)) #
 
-
+ #Diffs table----
   difs %>%
     mutate(
       Units = Units, UnitPrice = UnitPrice, ActualPerformance1 = (ActualPerformance / 100),
